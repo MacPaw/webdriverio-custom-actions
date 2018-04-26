@@ -10,6 +10,41 @@ let action = {
   defaultPageRefreshCount: 4,
   defaultPageRefreshTime: 3000,
 
+  open(path = '') {
+    browser.url(path);
+  },
+
+  waitForUrlToContain(path, waitTime = this.defaultWaitTime) {
+    browser.waitUntil(
+      () => browser.getUrl().includes(path),
+      waitTime,
+      `Current url '${browser.getUrl()}' does not contain '${path}'`
+    );
+  },
+
+  executeActionInFrame(frameSelector, action) {
+    browser.frame(frameSelector);
+    action();
+    browser.frame(null);
+  },
+
+  executeActionInSecondWindow(action) {
+    const {first, second} = browser.windowHandles();
+
+    browser.window(second);
+    action();
+    browser.window(first);
+  },
+
+  refreshPage() {
+    browser.refresh();
+  },
+
+  waitAndRefreshPage(waitTime = 0) {
+    this.refresh();
+    browser.pause(waitTime);
+  },
+
   findElements(selector, waitTime = this.defaultWaitTime) {
     this.waitForVisible(selector, waitTime);
 
@@ -134,9 +169,30 @@ let action = {
     browser.chooseFile(selector, localPath);
   },
 
-  waitAndRefreshPage(waitTime = 0) {
-    browser.refresh();
-    browser.pause(waitTime);
+  getFromLocalStorage(name) {
+    return this.executeJS((ItemName) => {
+      return browser.localStorage.getItem(ItemName);
+    }, name);
+  },
+
+  setToLocalStorage(name, value) {
+    return this.executeJS((itemName, itemValue) => {
+      return browser.localStorage.setItem(itemName, itemValue);
+    }, name, value);
+  },
+
+  removeFromLocalStorage(name) {
+    return this.executeJS((ItemName) => {
+      return browser.localStorage.removeItem(ItemName);
+    }, name);
+  },
+
+  clearCookie(name = null) {
+    return browser.deleteCookie(name);
+  },
+
+  clearAllCookies() {
+    return this.clearCookie();
   },
 };
 
