@@ -14,6 +14,10 @@ let action = {
     browser.url(path);
   },
 
+  wait(waitTime = 0) {
+    browser.pause(waitTime);
+  },
+
   waitForUrlToContain(path, waitTime = this.defaultWaitTime) {
     browser.waitUntil(
       () => browser.getUrl().includes(path),
@@ -41,7 +45,7 @@ let action = {
   },
 
   waitAndRefreshPage(waitTime = 0) {
-    this.refresh();
+    this.refreshPage();
     browser.pause(waitTime);
   },
 
