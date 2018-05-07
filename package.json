@@ -1,6 +1,6 @@
 {
   "name": "webdriverio-custom-actions",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Wrapper for the standard wdio browser actions",
   "main": "index.js",
   "author": "Sergey Panchenko",
