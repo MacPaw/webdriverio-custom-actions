@@ -175,19 +175,19 @@ let action = {
 
   getFromLocalStorage(name) {
     return this.executeJS((ItemName) => {
-      return browser.localStorage.getItem(ItemName);
+      return window.localStorage.getItem(ItemName);
     }, name);
   },
 
   setToLocalStorage(name, value) {
     return this.executeJS((itemName, itemValue) => {
-      return browser.localStorage.setItem(itemName, itemValue);
+      return window.localStorage.setItem(itemName, itemValue);
     }, name, value);
   },
 
   removeFromLocalStorage(name) {
     return this.executeJS((ItemName) => {
-      return browser.localStorage.removeItem(ItemName);
+      return window.localStorage.removeItem(ItemName);
     }, name);
   },
 
