@@ -33,7 +33,7 @@ let action = {
   },
 
   executeActionInSecondWindow(action) {
-    const {first, second} = browser.windowHandles();
+    const [first, second] = browser.windowHandles().value;
 
     browser.window(second);
     action();
