@@ -6,7 +6,7 @@ const addDays = require('date-fns/add_days');
 const getTime = require('date-fns/get_time');
 
 let action = {
-  defaultWaitTime: 10000,
+  defaultWaitTime: browser.options.waitforTimeout,
   defaultPageRefreshCount: 4,
   defaultPageRefreshTime: 3000,
 
