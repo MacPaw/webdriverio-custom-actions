@@ -197,7 +197,7 @@ let action = {
   },
 
   clearAllCookies() {
-    return this.deleteCookies();
+    return browser.deleteCookies();
   },
 };
 
