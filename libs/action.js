@@ -28,7 +28,7 @@ let action = {
 
   waitForText(selector, waitTime = this.defaultWaitTime) {
     browser.waitUntil(
-        () => this.getText(selector).length > 0,
+        () => $(selector).getText().length > 0,
         waitTime,
         `Element '${selector} does not contain text.`);
   },
