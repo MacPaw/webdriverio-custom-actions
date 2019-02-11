@@ -121,7 +121,7 @@ let action = {
   getCssProperty(selector, property, waitTime = this.defaultWaitTime) {
     this.waitForDisplayed(selector, waitTime);
 
-    return $(selector).getCssProperty(property);
+    return $(selector).getCSSProperty(property);
   },
 
   getValue(selector, waitTime = this.defaultWaitTime) {
