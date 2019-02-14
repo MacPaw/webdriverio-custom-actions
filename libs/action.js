@@ -40,11 +40,11 @@ let action = {
   },
 
   executeActionInSecondWindow(action) {
-    const [first, second] = browser.getWindowHandles().value;
+    const [first, second] = browser.getWindowHandles();
 
-    browser.switchWindow(second);
+    browser.switchToWindow(second);
     action();
-    browser.switchWindow(first);
+    browser.switchToWindow(first);
   },
 
   refreshPage() {
@@ -57,7 +57,7 @@ let action = {
   },
 
   findElements(selector, waitTime = this.defaultWaitTime) {
-    this.waitForDisplayed(selector, waitTime);
+    this.waitForVisible(selector, waitTime);
 
     return $$(selector);
   },
@@ -72,7 +72,7 @@ let action = {
 
   waitForTextToBe(selector, expectedText, pageRefreshCount = this.defaultPageRefreshCount) {
     return this.waitForResultToBe(expectedText, () => {
-      return browser.isDisplayed(selector) ? this.getText(selector) : '';
+      return $(selector).isDisplayed() ? this.getText(selector) : '';
     }, pageRefreshCount);
   },
 
@@ -93,44 +93,44 @@ let action = {
   },
 
   click(selector, waitTime = this.defaultWaitTime) {
-    this.waitForDisplayed(selector, waitTime);
+    this.waitForVisible(selector, waitTime);
     this.waitForEnabled(selector, waitTime);
 
     return $(selector).click();
   },
 
   setValue(selector, value, waitTime = this.defaultWaitTime) {
-    this.waitForDisplayed(selector, waitTime);
+    this.waitForVisible(selector, waitTime);
 
     return $(selector).setValue(value);
   },
 
   getText(selector, waitTime = this.defaultWaitTime) {
-    this.waitForDisplayed(selector, waitTime);
+    this.waitForVisible(selector, waitTime);
     this.waitForText(selector, waitTime);
 
     return $(selector).getText();
   },
 
   getAttribute(selector, attribute, waitTime = this.defaultWaitTime) {
-    this.waitForDisplayed(selector, waitTime);
+    this.waitForVisible(selector, waitTime);
 
     return $(selector).getAttribute(attribute);
   },
 
   getCssProperty(selector, property, waitTime = this.defaultWaitTime) {
-    this.waitForDisplayed(selector, waitTime);
+    this.waitForVisible(selector, waitTime);
 
     return $(selector).getCSSProperty(property);
   },
 
   getValue(selector, waitTime = this.defaultWaitTime) {
-    this.waitForDisplayed(selector, waitTime);
+    this.waitForVisible(selector, waitTime);
 
     return $(selector).getValue(selector);
   },
 
-  waitForDisplayed(selector, waitTime = this.defaultWaitTime) {
+  waitForVisible(selector, waitTime = this.defaultWaitTime) {
     return $(selector).waitForDisplayed(waitTime);
   },
 
@@ -170,26 +170,20 @@ let action = {
   },
 
   chooseFile(selector, localPath, waitTime = this.defaultWaitTime) {
-    this.waitForDisplayed(selector, waitTime);
+    this.waitForVisible(selector, waitTime);
     browser.chooseFile(selector, localPath);
   },
 
-  getFromLocalStorage(name) {
-    return this.executeJS((ItemName) => {
-      return window.getLocalStorageItem(ItemName);
-    }, name);
+  getFromLocalStorage(key) {
+    return browser.getLocalStorageItem(key);
   },
 
-  setToLocalStorage(name, value) {
-    return this.executeJS((itemName, itemValue) => {
-      return window.setLocalStorage(itemName, itemValue);
-    }, name, value);
+  setToLocalStorage(key, value) {
+    return browser.setLocalStorage(key, value);
   },
 
-  removeFromLocalStorage(name) {
-    return this.executeJS((ItemName) => {
-      return window.deleteLocalStorageItem(ItemName);
-    }, name);
+  removeFromLocalStorage(key) {
+    return browser.deleteLocalStorageItem(key);
   },
 
   clearCookie(name = null) {
