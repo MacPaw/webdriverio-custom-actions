@@ -107,7 +107,6 @@ let action = {
 
   getText(selector, waitTime = this.defaultWaitTime) {
     this.waitForVisible(selector, waitTime);
-    this.waitForText(selector, waitTime);
 
     return $(selector).getText();
   },
