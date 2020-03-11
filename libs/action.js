@@ -9,13 +9,10 @@ let action = {
   defaultWaitTime: browser ? browser.config.waitforTimeout : 10000,
   defaultPageRefreshCount: 4,
   defaultPageRefreshTime: 3000,
+  defaultAttribute: 'value',
 
   open(path = '') {
     browser.url(path);
-  },
-
-  wait(waitTime = 0) {
-    browser.pause(waitTime);
   },
 
   waitForUrlToContain(path, waitTime = this.defaultWaitTime) {
@@ -45,15 +42,6 @@ let action = {
     browser.switchToWindow(second);
     action();
     browser.switchToWindow(first);
-  },
-
-  refreshPage() {
-    browser.refresh();
-  },
-
-  waitAndRefreshPage(waitTime = 0) {
-    this.refreshPage();
-    browser.pause(waitTime);
   },
 
   findElements(selector, waitTime = this.defaultWaitTime) {
@@ -111,6 +99,11 @@ let action = {
     return $(selector).getText();
   },
 
+  selectByAttribute(selector, value, attribute =  this.defaultAttribute, waitTime = this.defaultWaitTime) {
+    this.waitForEnabled(selector, waitTime);
+    $(selector).selectByAttribute(attribute, value);
+  },
+
   getAttribute(selector, attribute, waitTime = this.defaultWaitTime) {
     this.waitForVisible(selector, waitTime);
 
@@ -145,6 +138,14 @@ let action = {
     return $(selector).waitForEnabled(waitTime);
   },
 
+  waitIsDisplayed(selector, waitTime = this.defaultWaitTime) {
+    try {
+      this.waitForVisible(selector, waitTime);
+    } catch (err) {
+      return false;
+    }
+  },
+
   clearElement(selector, waitTime = this.defaultWaitTime) {
     this.waitForEnabled(selector, waitTime);
 
@@ -160,37 +161,9 @@ let action = {
     });
   },
 
-  executeJS(script) {
-    browser.execute(script);
-  },
-
-  uploadFile(file) {
-    browser.uploadFile(file);
-  },
-
   chooseFile(selector, localPath, waitTime = this.defaultWaitTime) {
     this.waitForVisible(selector, waitTime);
     browser.chooseFile(selector, localPath);
-  },
-
-  getFromLocalStorage(key) {
-    return browser.getLocalStorageItem(key);
-  },
-
-  setToLocalStorage(key, value) {
-    return browser.setLocalStorage(key, value);
-  },
-
-  removeFromLocalStorage(key) {
-    return browser.deleteLocalStorageItem(key);
-  },
-
-  clearCookie(name = null) {
-    return browser.deleteCookies(name);
-  },
-
-  clearAllCookies() {
-    return browser.deleteCookies();
   },
 };
 

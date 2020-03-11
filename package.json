@@ -6,5 +6,8 @@
   "author": "Sergey Panchenko",
   "contributors": [
     "Artem Tykhonov"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
