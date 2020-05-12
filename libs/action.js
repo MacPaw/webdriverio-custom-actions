@@ -2,10 +2,7 @@
 
 const browser = global.browser;
 
-const addDays = require('date-fns/add_days');
-const getTime = require('date-fns/get_time');
-
-let action = {
+module.exports = {
   defaultWaitTime: browser ? browser.config.waitforTimeout : 10000,
   defaultPageRefreshCount: 4,
   defaultPageRefreshTime: 3000,
@@ -17,17 +14,17 @@ let action = {
 
   waitForUrlToContain(path, waitTime = this.defaultWaitTime) {
     browser.waitUntil(
-        () => browser.getUrl().includes(path),
-        waitTime,
-        `Current url '${browser.getUrl()}' does not contain '${path}'`
+      () => browser.getUrl().includes(path),
+      waitTime,
+      `Current url '${browser.getUrl()}' does not contain '${path}'`
     );
   },
 
   waitForText(selector, waitTime = this.defaultWaitTime) {
     browser.waitUntil(
-        () => $(selector).getText().length > 0,
-        waitTime,
-        `Element '${selector} does not contain text.`);
+      () => $(selector).getText().length > 0,
+      waitTime,
+      `Element '${selector} does not contain text.`);
   },
 
   executeActionInFrame(frameSelector, action) {
@@ -99,7 +96,7 @@ let action = {
     return $(selector).getText();
   },
 
-  selectByAttribute(selector, value, attribute =  this.defaultAttribute, waitTime = this.defaultWaitTime) {
+  selectByAttribute(selector, value, attribute = this.defaultAttribute, waitTime = this.defaultWaitTime) {
     this.waitForEnabled(selector, waitTime);
     $(selector).selectByAttribute(attribute, value);
   },
@@ -152,19 +149,8 @@ let action = {
     return $(selector).clearValue();
   },
 
-  setCookie(name, value) {
-    browser.setCookies({
-      name,
-      value,
-      domain: browser.options.domain,
-      expiry: Math.floor(getTime(addDays(new Date(), 1)) / 1000),
-    });
-  },
-
   chooseFile(selector, localPath, waitTime = this.defaultWaitTime) {
     this.waitForVisible(selector, waitTime);
     browser.chooseFile(selector, localPath);
   },
 };
-
-module.exports = action;
