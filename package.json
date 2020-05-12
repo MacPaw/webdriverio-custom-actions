@@ -5,9 +5,16 @@
   "main": "index.js",
   "author": "Sergey Panchenko",
   "contributors": [
-    "Artem Tykhonov"
+    "Artem Tykhonov",
+    "Maksym Shykov",
+    "Volodymyr Dobrygin"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MacPaw/webdriverio-custom-actions.git"
+  },
+  "license": "ISC"
 }

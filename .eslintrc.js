@@ -1,19 +1,22 @@
 module.exports = {
-  extends: [
-    '@macpaw/eslint-config-webservices/rules/base',
-    '@macpaw/eslint-config-webservices/rules/filenames',
-    '@macpaw/eslint-config-webservices/rules/promise',
-  ],
-  parser: 'espree',
+  extends: '@macpaw/eslint-config-webservices-base',
+
   parserOptions: {
-    ecmaVersion: 8,
     sourceType: 'script',
   },
-  plugins: ['async-await'],
+
+  env: {
+    node: true,
+    es6: true,
+  },
+
   rules: {
-    strict: ['warn', 'global'],
-    'no-unused-expressions': ['off'],
-    'newline-after-var': ['off'],
-    'filenames/match-regex': ['off'],
+    strict: ['error', 'global'],
+  },
+
+  globals: {
+    $: 'readonly',
+    $$: 'readonly',
+    browser: 'readonly',
   },
 };
