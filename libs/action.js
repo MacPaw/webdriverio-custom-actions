@@ -69,7 +69,8 @@ module.exports = {
         return actualResult;
       }
 
-      this.waitAndRefreshPage(this.defaultPageRefreshTime);
+      browser.refresh();
+      browser.pause(this.defaultPageRefreshTime);
 
       return iterate(--iterations);
     };
@@ -138,6 +139,15 @@ module.exports = {
   waitIsDisplayed(selector, waitTime = this.defaultWaitTime) {
     try {
       this.waitForVisible(selector, waitTime);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  },
+
+  waitIsInvisible(selector, waitTime = this.defaultWaitTime) {
+    try {
+      this.waitForInvisible(selector, waitTime);
       return true;
     } catch (err) {
       return false;
