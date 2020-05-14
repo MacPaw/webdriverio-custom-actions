@@ -138,6 +138,7 @@ module.exports = {
   waitIsDisplayed(selector, waitTime = this.defaultWaitTime) {
     try {
       this.waitForVisible(selector, waitTime);
+      return true;
     } catch (err) {
       return false;
     }
