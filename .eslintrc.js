@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   extends: '@macpaw/eslint-config-webservices-base',
 

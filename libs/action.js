@@ -78,6 +78,24 @@ module.exports = {
     return iterate(pageRefreshCount);
   },
 
+  selectCheckBox(selector, waitTime = this.defaultWaitTime) {
+    this.waitForVisible(selector, waitTime);
+    this.waitForEnabled(selector, waitTime);
+
+    if (!selector.isSelected()) {
+      $(selector).click();
+    }
+  },
+
+  unselectCheckBox(selector, waitTime = this.defaultWaitTime) {
+    this.waitForVisible(selector, waitTime);
+    this.waitForEnabled(selector, waitTime);
+
+    if (selector.isSelected()) {
+      $(selector).click();
+    }
+  },
+
   click(selector, waitTime = this.defaultWaitTime) {
     this.waitForVisible(selector, waitTime);
     this.waitForEnabled(selector, waitTime);
