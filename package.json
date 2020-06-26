@@ -1,6 +1,6 @@
 {
   "name": "@macpaw/webdriverio-custom-actions",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "description": "Wrapper for the standard wdio browser actions",
   "main": "lib/index.js",
   "author": "Sergey Panchenko",
