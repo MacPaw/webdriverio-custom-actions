@@ -2,13 +2,16 @@
   "name": "@macpaw/webdriverio-custom-actions",
   "version": "2.5.0",
   "description": "Wrapper for the standard wdio browser actions",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": "Sergey Panchenko",
   "contributors": [
     "Artem Tykhonov",
     "Maksym Shykov",
     "Volodymyr Dobrygin"
   ],
+  "scripts": {
+    "lint": "eslint ."
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
@@ -16,5 +19,14 @@
     "type": "git",
     "url": "git+https://github.com/MacPaw/webdriverio-custom-actions.git"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@macpaw/eslint-config-webservices": "^3.1.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-plugin-async-await": "^0.0.0",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-promise": "^4.2.1"
+  }
 }
