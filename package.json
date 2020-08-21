@@ -1,7 +1,7 @@
 {
   "name": "@macpaw/webdriverio-custom-actions",
   "version": "3.0.0",
-  "description": "Wrapper for the standard wdio browser actions",
+  "description": "Wrapper for the standard webdriverIO browser and element actions",
   "main": "lib/index.js",
   "author": "Sergey Panchenko",
   "contributors": [
@@ -28,5 +28,8 @@
     "eslint-plugin-filenames": "^1.3.2",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-promise": "^4.2.1"
+  },
+  "dependencies": {
+    "webdriverio": "^6.4.0"
   }
 }
