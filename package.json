@@ -1,6 +1,6 @@
 {
   "name": "@macpaw/webdriverio-custom-actions",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Wrapper for the standard webdriverIO browser and element actions",
   "main": "lib/index.js",
   "author": "Sergey Panchenko",
